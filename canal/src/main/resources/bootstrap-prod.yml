@@ -1,0 +1,103 @@
+server:
+  port: 18084
+  host: localhost
+spring:
+  application:
+    name: tag-etocrm-canal-server
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos-tag.etocrm.net:80
+      #        namespace: ab3c6890-ad8d-4e4d-9e48-c552bc18c59b
+      config:
+        file-extension: yml
+        server-addr: nacos-tag.etocrm.net:80
+  #        group: PROD
+  #        namespace: ab3c6890-ad8d-4e4d-9e48-c552bc18c59b
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.60.96.105:4000/eto_crm_sys?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: dev_root
+    password: ^x:ww.5h<Jcg
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat,slf4j
+    initialSize: 10
+    initialization-mode: always
+    maxActive: 200
+    maxPoolPreparedStatementPerConnectionSize: 20
+    maxWait: 10000
+    minEvictableIdleTimeMillis: 30000
+    minIdle: 20
+    poolPreparedStatements: true
+    testOnBorrow: false
+    testOnReturn: false
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 20000
+    validationQuery: select 'x'
+    druid:
+      filter:
+        wall:
+          config:
+            multi-statement-allow: true
+  redis:
+    database: 0
+    host: 10.100.20.243
+    port: 6379
+    password: 123456
+  kafka:
+    bootstrap-servers: 10.60.96.214:9092,10.60.96.218:9092,10.60.96.219:9092
+    listener:
+      ack-mode: manual
+    producer:
+      batch-size: 16384
+      retries: 0
+      buffer-memory: 33554432
+      #20M
+      max-request-size: 20971520
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+    consumer:
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      enable-auto-commit: false
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000 # 5s,路由转发时HystrixCommand的执行超时时间，执行超过该时间会进行服务降级处理
+ribbon:
+  ###指的是建立连接所用的时间，适用于网络状况正常的情况下，两端连接所用的时间。
+  ReadTimeout: 50000
+  ###指的是建立连接后从服务器读取到可用资源所用的时间。
+  ConnectTimeout: 50000
+knife4j:
+  production: true
+feign:
+  hystrix:
+    enabled: true
+logging:
+  config: 'classpath:logback-spring-prod.xml'
+  level:
+    mapper: debug
+    org:
+      mybatis: debug
+ETL:
+  CANAL:
+    NUMBER: 100
+CUSTOM:
+  KAFKA:
+    TOPIC:
+      ETL_CANAL_INSTALL: ETL_CANAL_INSTALL
+      ETL_CANAL_DELETE: ETL_CANAL_DELETE
+      ETL_CANAL_UPDATE: ETL_CANAL_UPDATE
+canal:
+  host: 10.60.96.113
+  port: 11111
+  username: tags_ro
+  password: T0XM9^x_hPS$09xg
+  instance: example242

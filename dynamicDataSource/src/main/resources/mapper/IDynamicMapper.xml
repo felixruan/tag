@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.etocrm.dynamicDataSource.mapper.IDynamicMapper">
+
+    <select id="selectById" resultType="java.util.Map" parameterType="org.etocrm.dynamicDataSource.model.DO.DynamicDO">
+        select
+        <foreach collection="columns" item="item" open="" close="" separator=",">${item}</foreach>
+        from
+        <foreach collection="tableNames" item="item" open="" close="" separator=",">${item}</foreach>
+        <where>
+            <if test="whereClause!=null and whereClause!=''">
+                ${whereClause}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectList" resultType="java.util.TreeMap"
+            parameterType="org.etocrm.dynamicDataSource.model.DO.DynamicDO">
+        select
+        <foreach collection="columns" item="item" open="" close="" separator=",">${item}</foreach>
+        from
+        <foreach collection="tableNames" item="item" open="" close="" separator=",">${item}</foreach>
+        <where>
+            <if test="whereClause!=null and whereClause!=''">
+                ${whereClause}
+            </if>
+        </where>
+        <if test="orderStr!=null and orderStr!=''">
+            order by ${orderStr}
+        </if>
+        <if test="limitStart!=null and limitEnd!=null">
+            limit ${limitStart},${limitEnd}
+        </if>
+    </select>
+
+    <select id="selectListMat" resultType="java.util.TreeMap"
+            parameterType="org.etocrm.dynamicDataSource.model.DO.DynamicDO">
+        <choose>
+            <when test="column!=null and column!=''">
+                select
+                mat.id,mat.member_id,mat.unionid,mat.email,mat.mobile,mat.is_delete,wu.wechat_openid,wu.wechat_appid
+                from (
+            </when>
+            <otherwise>
+                select mat.member_id,mat.unionid,mat.email,mat.mobile,wu.wechat_openid,wu.wechat_appid from (
+            </otherwise>
+        </choose>
+        select
+        <foreach collection="columns" item="item" open="" close="" separator=",">${item}</foreach>
+        from
+        <foreach collection="tableNames" item="item" open="" close="" separator=",">${item}</foreach>
+        <where>
+            <if test="whereClause!=null and whereClause!=''">
+                ${whereClause}
+            </if>
+        </where>
+
+        <if test="orderStr!=null and orderStr!=''">
+
+        </if>
+        <if test="limitStart!=null and limitEnd!=null">
+
+        </if>
+        ) mat LEFT JOIN wechat_user wu on mat.unionid = wu.wechat_unionid
+
+        <if test="column!=null and column!=''">
+            where
+            <choose>
+                <when test="primaryKey!=null and primaryKey!=''">
+                    exists (select 1 from mat_map_calculation_data s where s.member_id = mat.member_id and s.handle_id =
+                    ${primaryKey})
+                </when>
+                <otherwise>
+                    exists (select 1 from sys_tag_group_user s where s.user_id = mat.id and s.tag_group_id = ${column})
+                </otherwise>
+            </choose>
+        </if>
+        <if test="operateTableName != null and operateTableName != '' ">
+            where mat.member_id in ${operateTableName}
+
+        </if>
+
+
+    </select>
+
+    <select id="selectListId" resultType="java.util.TreeMap"
+            parameterType="org.etocrm.dynamicDataSource.model.DO.DynamicDO">
+        select
+        <foreach collection="columns" item="item" open="" close="" separator=",">${item}</foreach>
+        from ${operateTableName}
+        <where>
+            ${primaryKey} &gt;= (select ${primaryKey} from ${operateTableName} order by ${primaryKey} asc limit
+            ${limitStart},1 )
+            <if test="limitEnd!=0">
+                AND ${primaryKey} &lt; (select ${primaryKey} from ${operateTableName} order by ${primaryKey} asc limit
+                ${limitEnd},1 )
+            </if>
+        </where>
+    </select>
+
+    <select id="selectListByPage" resultType="java.util.HashMap">
+        select
+        <foreach collection="columns" item="item" open="" close="" separator=",">${item}</foreach>
+        from
+        <foreach collection="tableNames" item="item" open="" close="" separator=",">${item}</foreach>
+        <where>
+            <if test="whereClause!=null and whereClause!=''">
+                ${whereClause}
+            </if>
+        </where>
+        <if test="orderStr!=null and orderStr!=''">
+            order by ${orderStr}
+        </if>
+    </select>
+
+    <update id="updateRecord" parameterType="org.etocrm.dynamicDataSource.model.DO.DynamicDO">
+        update ${operateTableName}
+        set
+        <foreach item="value" index="key" collection="operrateColumnsAndValue.entrySet()" open="" separator=","
+                 close="">
+            ${key}=#{value}
+        </foreach>
+        <where>
+            <if test="whereClause!=null and whereClause!=''">
+                ${whereClause}
+            </if>
+        </where>
+    </update>
+
+    <insert id="insertRecord" parameterType="java.util.Map">
+        insert into ${operateTableName}(<foreach item="value" index="key"
+                                                 collection="operrateColumnsAndValue.entrySet()" open=""
+                                                 separator="," close="">${key}</foreach>)
+        values(
+        <foreach item="value" index="key" collection="operrateColumnsAndValue.entrySet()" open="" separator=","
+                 close="">
+            #{value}
+        </foreach>)
+    </insert>
+
+    <insert id="insertRecordBatch" parameterType="java.util.Map">
+        insert into ${operateTableName}(${column})
+        values
+        <foreach item="value" index="key" collection="columns" open="(" separator="),("
+                 close=")">
+            ${value}
+        </foreach>
+    </insert>
+
+
+    <delete id="deleteRecord" parameterType="java.util.Map">
+        delete from ${operateTableName}
+        <where>
+            <if test="whereClause!=null and whereClause!=''">
+                ${whereClause}
+            </if>
+        </where>
+    </delete>
+    <select id="selectListBySelective" resultType="java.util.HashMap"
+            parameterType="org.etocrm.dynamicDataSource.model.DO.DynamicDO">
+        select
+        <foreach collection="columns" item="item" open="" close="" separator=",">${item}</foreach>
+        from
+        <foreach collection="tableNames" item="item" open="" close="" separator=",">${item}</foreach>
+        <where>
+            <if test="whereClauseMap.size()>0">
+                <foreach item="value" index="key" collection="whereClauseMap.entrySet()" open="" separator=" and "
+                         close="">
+                    <choose>
+                        <when test="key=='joinClause'">
+                            ${value}
+                        </when>
+                        <otherwise>
+                            <bind name="isOper" value="'no'"></bind>
+                            <foreach item="valueOper" index="keyOper" collection="whereClauseOpertypeMap.entrySet()"
+                                     open="" separator=" and " close="">
+                                <if test="keyOper != null and keyOper != '' and keyOper == key">
+                                    <choose>
+                                        <when test="valueOper == 'in'">
+                                            ${key} in (${value})
+                                        </when>
+                                        <when test="valueOper == 'like'">
+                                            ${key} like '%${value}%'
+                                        </when>
+                                        <when test="valueOper == 'between'">
+                                            ${key} between ${value}
+                                        </when>
+                                        <when test="valueOper == 'morethan'">
+                                            ${key} &gt; #{value}
+                                        </when>
+                                        <when test="valueOper == 'lessthan'">
+                                            ${key} &lt; #{value}
+                                        </when>
+                                        <when test="valueOper == 'moreequal'">
+                                            ${key} &gt;= #{value}
+                                        </when>
+                                        <when test="valueOper == 'lessequal'">
+                                            ${key} &lt;= #{value}
+                                        </when>
+                                    </choose>
+                                    <bind name="isOper" value="'yes'"></bind>
+                                </if>
+                            </foreach>
+                            <if test="isOper == 'no'">
+                                ${key}=#{value}
+                            </if>
+                        </otherwise>
+                    </choose>
+                </foreach>
+            </if>
+        </where>
+        <if test="orderStr!=null and orderStr!=''">
+            order by ${orderStr}
+        </if>
+    </select>
+
+    <select id="getAllTable" resultType="java.util.HashMap"
+            parameterType="org.etocrm.dynamicDataSource.model.DO.DynamicDO">
+        select
+        <foreach collection="columns" item="item" open="" close="" separator=",">${item}</foreach>
+        from information_schema.tables
+        <where>
+            <if test="whereClause!=null and whereClause!=''">
+                ${whereClause}
+            </if>
+        </where>
+    </select>
+
+    <select id="getAllColumn" resultType="java.util.HashMap"
+            parameterType="org.etocrm.dynamicDataSource.model.DO.DynamicDO">
+        select
+        <foreach collection="columns" item="item" open="" close="" separator=",">${item}</foreach>
+        from information_schema.columns
+        <where>
+            <if test="whereClause!=null and whereClause!=''">
+                ${whereClause}
+            </if>
+        </where>
+    </select>
+
+    <update id="createTable" parameterType="org.etocrm.dynamicDataSource.model.DO.DynamicDO">
+        CREATE TABLE ${operateTableName}
+        (<foreach collection="columns" item="item" open="" close="" separator=",">${item}</foreach>)
+    </update>
+
+    <update id="addColumn" parameterType="org.etocrm.dynamicDataSource.model.DO.DynamicDO">
+        <foreach collection="columns" item="item" open="" close="" separator=";">
+            ALTER TABLE ${operateTableName} ADD ( ${item} )
+        </foreach>
+
+    </update>
+
+    <update id="addColumnSingle" parameterType="org.etocrm.dynamicDataSource.model.DO.DynamicDO">
+        ALTER TABLE ${operateTableName} ADD ( ${column} )
+    </update>
+
+    <delete id="deleteRecordByLimit" parameterType="org.etocrm.dynamicDataSource.model.DO.DynamicDO">
+        delete from ${operateTableName} where
+        <foreach item="value" index="key" collection="operrateColumnsAndValue.entrySet()" open="" separator=","
+                 close="">
+            ${key}=#{value}
+        </foreach>
+        LIMIT ${limitStart}
+    </delete>
+
+    <delete id="truncateTable" parameterType="string">
+      TRUNCATE TABLE ${tableName}
+    </delete>
+
+    <!--以下是对json类型处理！！！-->
+
+    <update id="updateJsonValueByWhere" parameterType="org.etocrm.dynamicDataSource.model.DO.DictionaryJsonDO">
+        UPDATE ${tableName} SET
+        <if test="columnName!=null and columnName!=''">
+            ${columnName} = ${columnNameValue}
+        </if>
+        <where>
+            <if test="whereClause!=null and whereClause!=''">
+                <foreach item="value" index="key" collection="whereClauseMap.entrySet()" open="" separator="," close="">
+                    ${key}=#{value}
+                </foreach>
+            </if>
+        </where>
+    </update>
+
+    <update id="deleteOriginColumnNameByPk" parameterType="org.etocrm.dynamicDataSource.model.DO.DictionaryJsonDO">
+        UPDATE ${tableName} SET
+        <if test="columnName!=null and columnName!=''">
+            ${columnName} = JSON_REMOVE(${columnName},${columnNameValue})
+            <where>
+                <if test="whereClause!=null and whereClause!=''">
+                    <foreach item="value" index="key" collection="whereClauseMap.entrySet()" open="" separator=","
+                             close="">
+                        ${key}=#{value}
+                    </foreach>
+                </if>
+            </where>
+        </if>
+    </update>
+
+    <update id="updateOriginColumnNameByPk" parameterType="org.etocrm.dynamicDataSource.model.DO.DictionaryJsonDO">
+        UPDATE ${tableName} SET
+        <if test="columnName!=null and columnName!=''">
+            ${columnName} = JSON_SET(${columnName},${columnNameValue},${newColumnNameValue})
+            <where>
+                <if test="whereClause!=null and whereClause!=''">
+                    <foreach item="value" index="key" collection="whereClauseMap.entrySet()" open="" separator=","
+                             close="">
+                        ${key}=#{value}
+                    </foreach>
+                </if>
+            </where>
+        </if>
+    </update>
+
+    <!--    <select id="findAllOriginColumnNameByParameterTypeLike" parameterType="string"-->
+    <!--            resultType="org.etocrm.dynamicDataSource.model.DO.DictionaryDO">-->
+    <!--        SELECT-->
+    <!--        <include refid="Base_Column_List"/>-->
+    <!--        FROM dictionary WHERE json->'$[*].originColumnName' like concat('%',#{parameter},'%')-->
+    <!--    </select>-->
+
+    <!--    -->
+
+    <select id="findOriginColumnNameWherePk" parameterType="org.etocrm.dynamicDataSource.model.DO.DictionaryJsonDO"
+            resultType="map">
+        select
+        <foreach collection="columns" item="item" open="" close="" separator=",">${item}</foreach>
+        from ${tableName}
+        <where>
+            <if test="whereClause!=null and whereClause!=''">
+                <foreach item="value" index="key" collection="whereClauseMap.entrySet()" open="" separator="," close="">
+                    ${key}=#{value}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertPlusRecord" parameterType="java.util.Map">
+        insert into ${tableName}(<foreach collection="columnList"
+                                          item="column" index="key"
+                                          separator=",">${column}</foreach>)
+        values
+        <foreach item="vmap" index="key" collection="valueList" separator=",">
+            <foreach item="value" index="key" collection="vmap.entrySet()" open="(" separator=","
+                     close=")">
+                #{value}
+            </foreach>
+        </foreach>
+
+    </insert>
+
+
+    <select id="count" parameterType="string" resultType="int">
+        select count(1) from ${tableName}
+    </select>
+
+    <select id="countByWhere" parameterType="org.etocrm.dynamicDataSource.model.DO.DynamicDO" resultType="int">
+        select count(1)
+        from
+        <foreach collection="tableNames" item="item" open="" close="" separator=",">${item}</foreach>
+        <where>
+            <if test="whereClause!=null and whereClause!=''">
+                ${whereClause}
+            </if>
+        </where>
+    </select>
+
+    <select id="getTablePrimaryKey" resultType="java.lang.String" parameterType="java.util.Map">
+        SELECT column_name FROM INFORMATION_SCHEMA.`KEY_COLUMN_USAGE` WHERE table_name=#{tableName} AND CONSTRAINT_SCHEMA=#{schme} AND constraint_name='PRIMARY'
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select ${key} from ${tableName} order by ${key} desc limit 1
+    </select>
+
+    <select id="getIdsList" resultType="Long"
+            parameterType="java.util.List">
+        select
+        <foreach collection="columns" item="item" open="" close="" separator=",">${item}</foreach>
+        from
+        <foreach collection="tableNames" item="item" open="" close="" separator=",">${item}</foreach>
+        <where>
+            <if test="whereClause!=null and whereClause!=''">
+                ${whereClause}
+            </if>
+        </where>
+        <if test="limitStart!=null and limitEnd!=null">
+            limit ${limitStart},${limitEnd}
+        </if>
+        <if test="orderStr!=null and orderStr!=''">
+            order by ${orderStr}
+        </if>
+    </select>
+
+    <select id="getString" parameterType="org.etocrm.dynamicDataSource.model.DO.DynamicDO" resultType="String">
+        select ${column}
+        from
+        <foreach collection="tableNames" item="item" open="" close="" separator=",">${item}</foreach>
+        <where>
+            <if test="whereClause!=null and whereClause!=''">
+                ${whereClause}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectListBySql" resultType="java.util.TreeMap"
+            parameterType="String">
+        ${sql}
+    </select>
+
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="sqlList" item="sql" separator=";">
+            ${sql}
+        </foreach>
+    </update>
+
+
+    <update id="updateBatch" parameterType="org.etocrm.dynamicDataSource.model.DO.UpdateBatchDO">
+        update ${tableName}
+        <trim prefix="set" suffixOverrides=",">
+            <foreach collection="updateColNameList" item="col" index="colIndex">
+                ${col}= case ${whereCol}
+                <trim suffix="end,">
+                    <foreach collection="dataList" item="item" index="index">
+                        when #{item.${whereCol}} then #{item.${col}}
+                    </foreach>
+                </trim>
+            </foreach>
+
+        </trim>
+        <if test="null!=updateColNameList and updateColNameList.size>0">
+            ,updated_time=now()
+        </if>
+        <where>
+            org_id=#{orgId} and brands_id=#{brandsId} and
+            ${whereCol} in
+            <foreach collection="dataList" index="index" item="item" separator="," open="(" close=")">
+                #{item.${whereCol},jdbcType=BIGINT}
+            </foreach>
+        </where>
+    </update>
+
+    <insert id="saveOrUpdateRecordBatch" parameterType="java.util.Map">
+        insert into ${tableName}(<foreach collection="columnList"
+                                          item="column" index="key"
+                                          separator=",">${column}</foreach>)
+        values
+        <foreach item="vmap" index="key" collection="valueList" separator=",">
+            <foreach item="value" index="key" collection="vmap.entrySet()" open="(" separator=","
+                     close=")">
+                #{value}
+            </foreach>
+        </foreach>
+        ON DUPLICATE KEY UPDATE updated_time=now(),
+        <foreach collection="columnList"
+                 item="column" index="key"
+                 separator=",">
+            ${column}=values(${column})
+        </foreach>
+    </insert>
+</mapper>

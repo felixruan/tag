@@ -1,0 +1,183 @@
+server:
+  port: 18073
+  host: localhost
+spring:
+  application:
+    name: tag-etocrm-tagManager-server
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.100.20.243:8848
+        namespace: 74a80991-83ec-4012-a0d8-bcf399ed4da4
+      config:
+        file-extension: yml
+        server-addr: 10.100.20.243:8848
+        group: DEV
+        namespace: 74a80991-83ec-4012-a0d8-bcf399ed4da4
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.100.20.113:4000/tag_dev?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: dev_root
+    password: $x:wM.6h>gcS
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat,slf4j
+    initialSize: 10
+    initialization-mode: always
+    maxActive: 200
+    maxPoolPreparedStatementPerConnectionSize: 20
+    maxWait: 10000
+    minEvictableIdleTimeMillis: 30000
+    minIdle: 20
+    poolPreparedStatements: true
+    testOnBorrow: false
+    testOnReturn: false
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 20000
+    validationQuery: select 'x'
+    druid:
+      filter:
+        wall:
+          config:
+            multi-statement-allow: true
+  redis:
+    database: 0
+    host: 10.100.20.243
+    port: 6379
+    password: 123456
+  kafka:
+    bootstrap-servers: 10.100.20.241:9092,10.100.20.242:9092
+    listener:
+      ack-mode: manual
+      missing-topics-fatal: true
+    producer:
+      batch-size: 16384
+      retries: 0
+      buffer-memory: 33554432
+      #20M
+      max-request-size: 20971520
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+    consumer:
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      enable-auto-commit: false
+      max-poll-records: 1
+  # batch
+  batch:
+    job:
+      # 默认自动执行定义的Job(true)，改为false，需要jobLaucher.run执行
+      enabled: false
+      # spring batch在数据库里面创建默认的数据表，如果不是always则会提示相关表不存在
+      initialize-schema: always
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000 # 5s,路由转发时HystrixCommand的执行超时时间，执行超过该时间会进行服务降级处理
+ribbon:
+  ###指的是建立连接所用的时间，适用于网络状况正常的情况下，两端连接所用的时间。
+  ReadTimeout: 50000
+  ###指的是建立连接后从服务器读取到可用资源所用的时间。
+  ConnectTimeout: 50000
+knife4j:
+  production: false
+feign:
+  hystrix:
+    enabled: true
+xxl:
+  job:
+    # 执行器通讯TOKEN [选填]：非空时启用；
+    access-token: etocrm@2020etocrmjob
+    admin:
+      # 调度中心部署跟地址 [选填]：如调度中心集群部署存在多个地址则用逗号分隔。执行器将会使用该地址进行"执行器心跳注册"和"任务结果回调"；为空则关闭自动注册；
+      address: http://jobserver-tag-sit.etocrm.net/etocrm-job-admin
+    executor:
+      # 执行器AppName [选填]：执行器心跳注册分组依据；为空则关闭自动注册
+      app-name: tag-job-executor-java
+      # 执行器IP [选填]：默认为空表示自动获取IP，多网卡时可手动设置指定IP，该IP不会绑定Host仅作为通讯实用；地址信息用于 "执行器注册" 和 "调度中心请求并触发任务"；
+      ip:
+      # 执行器端口号 [选填]：小于等于0则自动获取；默认端口为9999，单机部署多个执行器时，注意要配置不同执行器端口；
+      port: 9995
+      # 执行器运行日志文件存储磁盘路径 [选填] ：需要对该路径拥有读写权限；为空则使用默认路径；
+      log-path: /data/applogs/xxl-job/jobhandler
+      # 执行器日志保存天数 [选填] ：值大于3时生效，启用执行器Log文件定期清理功能，否则不生效；
+      log-retention-days: -1
+  base:
+    uri: http://jobserver-tag-sit.etocrm.net/etocrm-job-admin
+    job_info_uri: /jobinfo
+    job_group_uri: /jobgroup
+    job_user_name: admin
+    job_pass_word: 123456
+tag:
+#  # 标签数据自动更新 cron
+#  dataUpdateCron: 0 0 1 * * ?
+#  # 系统品牌id
+#  sysBrandsId: 1
+#  # 系统机构id
+#  sysOrgId: 3
+#  #自定义标签分类id
+#  customizTagClassesId: 60002
+#  # 自定义标签相关配置
+#  customiz:
+#    column: "[\"mobile\",\"number\",\"unionid\",\"openid\"]"
+#    templateHeader: "手机号/会员号/unionid/openid"
+#  # 群组画像对比标签信息
+#  group:
+#    dashboard: "{\"1_2\":[{\"tagClassesName\":\"基本属性\",\"tagList\":[{\"id\":60172,\"name\":\"性别\",\"code\":\"gender\"},{\"id\":60175,\"name\":\"年龄\",\"code\":\"age\"},{\"id\":60179,\"name\":\"注册来源\",\"code\":\"register_source\"},{\"id\":60174,\"name\":\"会员等级分布\",\"code\":\"vip_level\"}]},{\"tagClassesName\":\"消费能力\",\"tagList\":[{\"id\":60183,\"name\":\"客单价分布\",\"code\":\"customer_unit_price\"},{\"id\":60185,\"name\":\"订单数分布\",\"code\":\"order_count\"},{\"id\":60184,\"name\":\"件单价分布\",\"code\":\"unit_price\"},{\"id\":60182,\"name\":\"消费金额分布\",\"code\":\"pay_amount\"}]},{\"tagClassesName\":\"购物偏好\",\"tagList\":[{\"id\":60181,\"name\":\"购买渠道\",\"code\":\"bug_channel\"},{\"name\":\"购买品类\",\"code\":\"bug_product_category\"}]},{\"tagClassesName\":\"购物偏好\",\"tagList\":[{\"name\":\"生命周期\",\"code\":\"life_cycle\"}]}],\"2_3\":[{\"tagClassesName\":\"基本属性\",\"tagList\":[{\"id\":60157,\"name\":\"性别\",\"code\":\"gender\"},{\"id\":60160,\"name\":\"年龄\",\"code\":\"age\"},{\"id\":60164,\"name\":\"注册来源\",\"code\":\"register_source\"},{\"id\":60159,\"name\":\"会员等级分布\",\"code\":\"vip_level\"}]},{\"tagClassesName\":\"消费能力\",\"tagList\":[{\"id\":60168,\"name\":\"客单价分布\",\"code\":\"customer_unit_price\"},{\"id\":60170,\"name\":\"订单数分布\",\"code\":\"order_count\"},{\"id\":60169,\"name\":\"件单价分布\",\"code\":\"unit_price\"},{\"id\":60167,\"name\":\"消费金额分布\",\"code\":\"pay_amount\"}]},{\"tagClassesName\":\"购物偏好\",\"tagList\":[{\"id\":60166,\"name\":\"购买渠道\",\"code\":\"bug_channel\"},{\"name\":\"购买品类\",\"code\":\"bug_product_category\"}]},{\"tagClassesName\":\"购物偏好\",\"tagList\":[{\"name\":\"生命周期\",\"code\":\"life_cycle\"}]}]}"
+##  excel:
+##    # excel 读取数据多少条保存一次
+##    batchCount: 1000
+logging:
+  config: 'classpath:logback-spring.xml'
+  level:
+    mapper: debug
+    org:
+      mybatis: debug
+#excel:
+#  medol: 146
+#ETL:
+#  QUERY:
+#    MAX_NUMBER: 20000
+#  WRITER:
+#    MAX_NUMBER: 4000
+#  DELETE:
+#    NUMBER: 10000
+#  SAVE:
+#    USER: 10000
+CUSTOM:
+  KAFKA:
+    TOPIC:
+      TAG_TOPIC: TAG_TOPIC
+      TAG_USER_TOPIC: TAG_USER_TOPIC
+      TAG_GROUP_TOPIC: TAG_GROUP_TOPIC
+      TAG_GROUP_USER_TOPIC: TAG_GROUP_USER_TOPIC
+      AVG_REPURCHASE_CYCLE: AVG_REPURCHASE_CYCLE
+      LIFE_CYCLE: LIFE_CYCLE_TOPIC
+      LIFE_CYCLE_USER: LIFE_CYCLE_USER_TOPIC
+      TAG_YOUNGOR_DATA_TOPIC: TAG_YOUNGOR_DATA_TOPIC
+      MAT_REPORT_TOPIC: MAT_REPORT_TOPIC
+      MAT_BATCH_REPORT_TOPIC: MAT_BATCH_REPORT_TOPIC
+    GROUP:
+      TAG_TOPIC_GROUP: TAG_TOPIC_GROUP
+      TAG_GROUP_TOPIC_GROUP: TAG_GROUP_TOPIC_GROUP
+      LIFE_CYCLE_GROUP: LIFE_CYCLE_GROUP
+      TAG_YOUNGOR_DATA_GROUP: TAG_YOUNGOR_DATA_GROUP
+      MAT_REPORT_TOPIC_GROUP: MAT_REPORT_TOPIC_GROUP
+  file:
+    upload: http://woaapsh.woaap.com/files/file-upload
+    folderName: etocrm_tag
+
+#mat事件营销触发请求url
+mat:
+  url:
+    auth: https://ecrm-test.woaap.com/oauth/token
+    notice: https://ecrm-test.woaap.com/public-api/map/eventTrigger/report
+    work: https://ecrm-test.woaap.com/public-api/map/workUser/notify
+    grant_type: client_credentials
+    client_id: 100000
+    client_secret: TESTECRMuZvyFmivaAn2NtVF3IZ8SJv9LL3Ozc91EM3cHPWpHT28V4YALp75

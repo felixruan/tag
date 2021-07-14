@@ -1,0 +1,91 @@
+server:
+  port: 18080
+spring:
+  application:
+    name: tag-etocrm-gateway-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos-tag-sit.etocrm.net:80
+        namespace: 4002c992-18ce-41e1-a219-49dfd27e39cc
+      config:
+        file-extension: yml
+        server-addr: nacos-tag-sit.etocrm.net:80
+        group: SIT
+        namespace: 4002c992-18ce-41e1-a219-49dfd27e39cc
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.100.20.113:4000/tag_dev?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: dev_root
+    password: $x:wM.6h>gcS
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat,slf4j
+    initialSize: 10
+    initialization-mode: always
+    maxActive: 200
+    maxPoolPreparedStatementPerConnectionSize: 20
+    maxWait: 10000
+    minEvictableIdleTimeMillis: 30000
+    minIdle: 20
+    poolPreparedStatements: true
+    testOnBorrow: false
+    testOnReturn: false
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 20000
+    validationQuery: select 'x'
+    druid:
+      filter:
+        wall:
+          config:
+            multi-statement-allow: true
+  redis:
+    database: 1
+    host: 10.100.20.243
+    port: 6379
+    password: 123456
+  servlet:
+    multipart:
+      enabled: true
+      #单个文件大小
+      max-file-size: 10MB
+      #总上传数据大小
+      max-request-size: 20MB
+redis:
+  config:
+    expire: 7200
+knife4j:
+  production: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+# ribbon负载均衡
+ribbon:
+  eager-load:
+  enabled: true # 饥饿加载(eager-load)模式
+  MaxAutoRetries: 1 # 对当前实例的重试次数
+  MaxAutoRetriesNextServer: 2 # 切换实例的重试次数
+  ConnectTimeout: 50000 # 连接超时时间
+  ReadTimeout: 50000 # 读取数据超时
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000 # 5s,路由转发时HystrixCommand的执行超时时间，执行超过该时间会进行服务降级处理
+feign:
+  hystrix:
+    enabled: true
+gateway:
+  ignoreUrl:
+    - /auth/auth/login
+    - /auth/auth/crmauth
+    - /auth/auth/logout
+logging:
+  config: 'classpath:logback-spring.xml'
+  level:
+    mapper: debug
+    org:
+      mybatis: debug

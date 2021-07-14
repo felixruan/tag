@@ -1,0 +1,3651 @@
+{
+  "modules": [
+    {
+      "name": "mat_metadata",
+      "chnname": "MAT_元数据",
+      "entities": [
+        {
+          "title": "mat_event",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "主键id",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "event_code",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "事件名"
+            },
+            {
+              "name": "event_name",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "事件显示名"
+            },
+            {
+              "name": "burying_point_platform",
+              "type": "Integer",
+              "remark": "1 iOS、2 Android、3 JavaScript、4 小程序、5 服务端、6 其他",
+              "chnname": "应埋点平台"
+            },
+            {
+              "name": "history_thirty_num",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "过去30天入库"
+            },
+            {
+              "name": "status",
+              "type": "Integer",
+              "remark": "可见或隐藏",
+              "chnname": "显示状态",
+              "defaultValue": "0"
+            },
+            {
+              "name": "is_report",
+              "type": "Integer",
+              "remark": "1有，0无",
+              "chnname": "有无上报数据",
+              "defaultValue": "1"
+            },
+            {
+              "name": "touch_opportunity",
+              "type": "ShortString",
+              "remark": "例如：是在点击按钮的时候上报，还是已进入页面后即上报。",
+              "chnname": "触发时机"
+            },
+            {
+              "name": "is_receive",
+              "type": "Integer",
+              "remark": "启动或关闭接收上报数据",
+              "chnname": "是否接收",
+              "defaultValue": ""
+            },
+            {
+              "name": "remarks",
+              "type": "MiddleString",
+              "remark": "帮助业务人员更好理解的信息",
+              "chnname": "备注"
+            },
+            {
+              "name": "REVISION",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CREATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CREATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UPDATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UPDATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "delete_by",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "删除人",
+              "relationNoShow": true
+            },
+            {
+              "name": "is_delete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "删除标志",
+              "relationNoShow": true,
+              "defaultValue": "0"
+            },
+            {
+              "name": "delete_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "删除时间",
+              "relationNoShow": true
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "元数据事件表"
+        },
+        {
+          "title": "mat_event_property",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "主键id",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "property_code",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "属性名"
+            },
+            {
+              "name": "property_name",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "属性显示名"
+            },
+            {
+              "name": "data_type",
+              "type": "Integer",
+              "remark": "必填单选 1 NUMBER、2 BOOL、3 STRING、4 DATETIME、5 LIST'",
+              "chnname": "数据类型"
+            },
+            {
+              "name": "unit",
+              "type": "DefaultString",
+              "remark": "统计值的单位，设置后会在分析详情和概览中显示。",
+              "chnname": "单位/格式"
+            },
+            {
+              "name": "value_explain",
+              "type": "MiddleString",
+              "remark": "",
+              "chnname": "属性值说明或示例"
+            },
+            {
+              "name": "is_public",
+              "type": "Integer",
+              "remark": "公共属性是每个事件都有的固定属性",
+              "chnname": "是否为公共属性",
+              "defaultValue": "0"
+            },
+            {
+              "name": "is_report",
+              "type": "Integer",
+              "remark": "0 无、1 有",
+              "chnname": "上报数据"
+            },
+            {
+              "name": "status",
+              "type": "Integer",
+              "remark": "可见或隐藏",
+              "chnname": "显示状态",
+              "defaultValue": "0"
+            },
+            {
+              "name": "REVISION",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CREATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CREATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UPDATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UPDATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "delete_by",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "删除人",
+              "relationNoShow": true,
+              "defaultValue": ""
+            },
+            {
+              "name": "is_delete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "删除标志",
+              "relationNoShow": true,
+              "defaultValue": "0"
+            },
+            {
+              "name": "delete_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "删除时间",
+              "relationNoShow": true
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "元数据事件属性表"
+        },
+        {
+          "title": "mat_event_property_relationship",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "主键id",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "event_code",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "事件code"
+            },
+            {
+              "name": "property_code",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "属性code"
+            },
+            {
+              "name": "REVISION",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CREATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CREATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UPDATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UPDATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "delete_by",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "删除人",
+              "relationNoShow": true
+            },
+            {
+              "name": "is_delete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "删除标志",
+              "relationNoShow": true,
+              "defaultValue": "0"
+            },
+            {
+              "name": "delete_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "删除时间",
+              "relationNoShow": true
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "元数据事件属性关系表"
+        },
+        {
+          "title": "mat_user_property",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "主键id",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "property_code",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "属性名"
+            },
+            {
+              "name": "property_name",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "属性显示名"
+            },
+            {
+              "name": "data_type",
+              "type": "DefaultString",
+              "remark": "必填单选 NUMBER、BOOL、STRING、DATETIME、LIST",
+              "chnname": "数据类型"
+            },
+            {
+              "name": "unit",
+              "type": "DefaultString",
+              "remark": "统计值的单位，设置后会在分析详情和概览中显示。",
+              "chnname": "单位/格式"
+            },
+            {
+              "name": "value_explain",
+              "type": "MiddleString",
+              "remark": "",
+              "chnname": "属性值说明或示例"
+            },
+            {
+              "name": "status",
+              "type": "Integer",
+              "remark": "可见或隐藏",
+              "chnname": "显示状态",
+              "defaultValue": "0"
+            },
+            {
+              "name": "is_report",
+              "type": "Integer",
+              "remark": "有无上报数据",
+              "chnname": "上报数据"
+            },
+            {
+              "name": "REVISION",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CREATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CREATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UPDATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UPDATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "delete_by",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "删除人",
+              "relationNoShow": true
+            },
+            {
+              "name": "is_delete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "删除标志",
+              "relationNoShow": true,
+              "defaultValue": "0"
+            },
+            {
+              "name": "delete_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "删除时间",
+              "relationNoShow": true
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "元数据用户属性表"
+        },
+        {
+          "title": "mat_origin_terminal",
+          "fields": [
+            {
+              "name": "id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "主键id",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "terminal_code",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "终端名"
+            },
+            {
+              "name": "terminal_name",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "终端显示名"
+            },
+            {
+              "name": "terminal_identification",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "设备标识"
+            },
+            {
+              "name": "remarks",
+              "type": "MiddleString",
+              "remark": "帮助业务人员更好理解的信息",
+              "chnname": "备注"
+            },
+            {
+              "name": "CREATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CREATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UPDATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UPDATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "delete_by",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "删除人",
+              "relationNoShow": true
+            },
+            {
+              "name": "is_delete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "删除标志",
+              "relationNoShow": true,
+              "defaultValue": "0"
+            },
+            {
+              "name": "delete_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "删除时间",
+              "relationNoShow": true
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "埋点数据来源终端表"
+        },
+        {
+          "title": "utm_parameter",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "主键id",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "parameter_code",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "参数名"
+            },
+            {
+              "name": "parameter_name",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "参数显示名"
+            },
+            {
+              "name": "parameter_abbreviation",
+              "type": "DefaultString",
+              "remark": "表明此事件需要埋点上报的端，可多选。 iOS、Android、JS、后台、其他",
+              "chnname": "参数名缩写"
+            },
+            {
+              "name": "remarks",
+              "type": "MiddleString",
+              "remark": "帮助业务人员更好理解的信息",
+              "chnname": "备注"
+            },
+            {
+              "name": "CREATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CREATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UPDATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UPDATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "delete_by",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "删除人",
+              "relationNoShow": true
+            },
+            {
+              "name": "is_delete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "删除标志",
+              "relationNoShow": true,
+              "defaultValue": "0"
+            },
+            {
+              "name": "delete_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "删除时间",
+              "relationNoShow": true
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "UTM核心参数表"
+        },
+        {
+          "title": "utm_url_link",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "主键id",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "link_url",
+              "type": "MiddleString",
+              "remark": "",
+              "chnname": "链接url名"
+            },
+            {
+              "name": "link_url_name",
+              "type": "MiddleString",
+              "remark": "",
+              "chnname": "链接url显示名"
+            },
+            {
+              "name": "remarks",
+              "type": "MiddleString",
+              "remark": "帮助业务人员更好理解的信息",
+              "chnname": "备注"
+            },
+            {
+              "name": "CREATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CREATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UPDATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UPDATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "delete_by",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "删除人",
+              "relationNoShow": true
+            },
+            {
+              "name": "is_delete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "删除标志",
+              "relationNoShow": true,
+              "defaultValue": "0"
+            },
+            {
+              "name": "delete_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "删除时间",
+              "relationNoShow": true
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "UTM_url链接表"
+        },
+        {
+          "title": "mat_map_works",
+          "fields": [
+            {
+              "name": "id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "主键id",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "mat_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "mat流程id"
+            },
+            {
+              "name": "name",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "流程名称"
+            },
+            {
+              "name": "type",
+              "type": "Integer",
+              "remark": "1:事件营销 2:单次营销 3:周期性营销 4:被动触发营销",
+              "chnname": "营销类型"
+            },
+            {
+              "name": "status",
+              "type": "Integer",
+              "remark": "0:取消 1:未执行 2:等待执行 3:执行中 4: 已执行",
+              "chnname": "状态"
+            },
+            {
+              "name": "user_group_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "客户分组id"
+            },
+            {
+              "name": "trigger_condition",
+              "type": "LongText",
+              "remark": "",
+              "chnname": "事件营销触发条件"
+            },
+            {
+              "name": "begin_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "任务开始时间"
+            },
+            {
+              "name": "end_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "任务结束时间"
+            },
+            {
+              "name": "exec_type",
+              "type": "Integer",
+              "remark": "0:立即执行 1:计划执行'",
+              "chnname": "单次营销执行类型"
+            },
+            {
+              "name": "exec_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "单次营销执行时间"
+            },
+            {
+              "name": "exec_config",
+              "type": "LongText",
+              "remark": "",
+              "chnname": "周期性执行时间配置"
+            },
+            {
+              "name": "send_limit",
+              "type": "Integer",
+              "remark": "0:不限 1:限制",
+              "chnname": "触发次数"
+            },
+            {
+              "name": "send_limit_config",
+              "type": "LongText",
+              "remark": "",
+              "chnname": "触发次数具体配置"
+            },
+            {
+              "name": "handle_type",
+              "type": "Integer",
+              "remark": "1:不筛选 2:属性筛选",
+              "chnname": "人群处理类型"
+            },
+            {
+              "name": "conditions",
+              "type": "LongText",
+              "remark": "",
+              "chnname": "属性筛选条件"
+            },
+            {
+              "name": "is_open_abtest",
+              "type": "Integer",
+              "remark": "0:关闭 1:开启",
+              "chnname": "是否开启ABTest"
+            },
+            {
+              "name": "last_exec_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "最近一次执行时间"
+            },
+            {
+              "name": "trigger_count",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "触发人数"
+            },
+            {
+              "name": "remark",
+              "type": "MiddleString",
+              "remark": "",
+              "chnname": "备注说明"
+            },
+            {
+              "name": "is_compare",
+              "type": "Integer",
+              "remark": "0:否 1:是",
+              "chnname": "是否对照组"
+            },
+            {
+              "name": "percent",
+              "type": "Double",
+              "remark": "",
+              "chnname": "支线所占百分比"
+            },
+            {
+              "name": "exec_surplus_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "ABTest剩余处理执行时间"
+            },
+            {
+              "name": "handle_id",
+              "type": "BigInt",
+              "remark": "用于标记子流程",
+              "chnname": "分支id"
+            },
+            {
+              "name": "org_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "mat系统机构id"
+            },
+            {
+              "name": "REVISION",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CREATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CREATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UPDATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UPDATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "delete_by",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "删除人",
+              "relationNoShow": true
+            },
+            {
+              "name": "is_delete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "删除标志",
+              "relationNoShow": true,
+              "defaultValue": "0"
+            },
+            {
+              "name": "delete_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "删除时间",
+              "relationNoShow": true
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "自动化营销流程表"
+        },
+        {
+          "title": "mat_map_works_actions",
+          "fields": [
+            {
+              "name": "id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "主键id",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "mat_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "mat系统action的id"
+            },
+            {
+              "name": "works_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "works流程表主键id"
+            },
+            {
+              "name": "mat_work_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "mat系统works流程表主键id"
+            },
+            {
+              "name": "handle_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "handle表主键id"
+            },
+            {
+              "name": "mat_handle_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "mat系统handle表主键id"
+            },
+            {
+              "name": "brand_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "品牌id"
+            },
+            {
+              "name": "original_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "机构id"
+            },
+            {
+              "name": "media_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "微信素材media_id"
+            },
+            {
+              "name": "details",
+              "type": "LongText",
+              "remark": "",
+              "chnname": "发送内容详情"
+            },
+            {
+              "name": "send_type",
+              "type": "Integer",
+              "remark": "0:不处理 1:分组群发 2:客服消息 3:模板消息 4:小程序订阅消息",
+              "chnname": "消息类型"
+            },
+            {
+              "name": "tag_type",
+              "type": "Integer",
+              "remark": "1:公众号标签 2:CRM标签",
+              "chnname": "标签类型"
+            },
+            {
+              "name": "appid",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "公众号或小程序的APPID"
+            },
+            {
+              "name": "delay_hour",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "延迟小时"
+            },
+            {
+              "name": "delay_minute",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "延迟分钟"
+            },
+            {
+              "name": "delay_second",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "延迟秒"
+            },
+            {
+              "name": "REVISION",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CREATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CREATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UPDATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UPDATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "delete_by",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "删除人",
+              "relationNoShow": true
+            },
+            {
+              "name": "is_delete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "删除标志",
+              "relationNoShow": true,
+              "defaultValue": "0"
+            },
+            {
+              "name": "delete_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "删除时间",
+              "relationNoShow": true
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "自动化营销流程每种处理支线要发送的内容表"
+        },
+        {
+          "title": "mat_map_send_records",
+          "fields": [
+            {
+              "name": "id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "主键id",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "mat_works_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "mat系统works_id"
+            },
+            {
+              "name": "mat_handle_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "mat系统handle_id"
+            },
+            {
+              "name": "mat_action_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "mat系统action_id"
+            },
+            {
+              "name": "member_id",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "会员id"
+            },
+            {
+              "name": "unionid",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "unionid"
+            },
+            {
+              "name": "status",
+              "type": "Integer",
+              "remark": "0:取消 1:等待发送确认 2:等待发送 3:发送中 4:发送暂停 5:发送完成",
+              "chnname": "状态"
+            },
+            {
+              "name": "begin_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "发送开始时间"
+            },
+            {
+              "name": "end_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "发送结束时间"
+            },
+            {
+              "name": "send_status",
+              "type": "Integer",
+              "remark": "发送是否成功 : 1 成功，0 失败",
+              "chnname": "发送是否成功"
+            },
+            {
+              "name": "remark",
+              "type": "MiddleString",
+              "remark": "",
+              "chnname": "备注说明"
+            },
+            {
+              "name": "REVISION",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CREATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CREATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UPDATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UPDATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "delete_by",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "删除人",
+              "relationNoShow": true
+            },
+            {
+              "name": "is_delete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "删除标志",
+              "relationNoShow": true,
+              "defaultValue": "0"
+            },
+            {
+              "name": "delete_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "删除时间",
+              "relationNoShow": true
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "自动化营销流程发送记录表",
+          "nameTemplate": "{code}[{name}]"
+        },
+        {
+          "title": "mat_modular_info",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "主键id",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "mod_code",
+              "type": "ShortString",
+              "remark": "公众号(official)、小程序(app)、电商(online_shop)、CRM(crm)、导购通(shop_guide)",
+              "chnname": "模块名"
+            },
+            {
+              "name": "name",
+              "type": "ShortString",
+              "remark": "公众号、小程序、电商、CRM、导购通",
+              "chnname": "模块显示名"
+            },
+            {
+              "name": "remarks",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "备注"
+            },
+            {
+              "name": "REVISION",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CREATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CREATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UPDATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UPDATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "delete_by",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "删除人",
+              "relationNoShow": true
+            },
+            {
+              "name": "is_delete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "删除标志",
+              "relationNoShow": true,
+              "defaultValue": "0"
+            },
+            {
+              "name": "delete_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "删除时间",
+              "relationNoShow": true
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "mat模块信息表"
+        },
+        {
+          "title": "mat_automation_visit_auth_records",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "主键id",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "sys_code",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "对方系统编号"
+            },
+            {
+              "name": "app_name",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "访问己方系统名称"
+            },
+            {
+              "name": "api_url",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "访问己方接口路径"
+            },
+            {
+              "name": "request_ip",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "对方请求IP"
+            },
+            {
+              "name": "access_key",
+              "type": "MiddleString",
+              "remark": "",
+              "chnname": "公钥"
+            },
+            {
+              "name": "secret_key",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "私钥"
+            },
+            {
+              "name": "status",
+              "type": "Integer",
+              "remark": "0启用、1停用",
+              "chnname": "启停标志"
+            },
+            {
+              "name": "REVISION",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CREATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CREATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UPDATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UPDATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "delete_by",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "删除人",
+              "relationNoShow": true
+            },
+            {
+              "name": "is_delete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "删除标志",
+              "relationNoShow": true,
+              "defaultValue": "0"
+            },
+            {
+              "name": "delete_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "删除时间",
+              "relationNoShow": true
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "自动化营销访问授权记录表"
+        },
+        {
+          "title": "mat_event_modular_relationship",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "主键id",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "event_code",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "事件code"
+            },
+            {
+              "name": "mod_code",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "模块code"
+            },
+            {
+              "name": "REVISION",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CREATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CREATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UPDATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UPDATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "delete_by",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "删除人",
+              "relationNoShow": true
+            },
+            {
+              "name": "is_delete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "删除标志",
+              "relationNoShow": true,
+              "defaultValue": "0"
+            },
+            {
+              "name": "delete_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "删除时间",
+              "relationNoShow": true
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "元数据事件模块关系表"
+        },
+        {
+          "title": "mat_event_reporting_data",
+          "fields": [
+            {
+              "name": "id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "主键id",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "event_code",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "事件code"
+            },
+            {
+              "name": "event_property",
+              "type": "LongText",
+              "remark": "",
+              "chnname": "事件属性json"
+            },
+            {
+              "name": "user_property",
+              "type": "LongText",
+              "remark": "",
+              "chnname": "用户属性json"
+            },
+            {
+              "name": "mod_code",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "模块code"
+            },
+            {
+              "name": "mod_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "模块id"
+            },
+            {
+              "name": "reporting_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "上报时间"
+            },
+            {
+              "name": "REVISION",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CREATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CREATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UPDATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UPDATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "delete_by",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "删除人",
+              "relationNoShow": true
+            },
+            {
+              "name": "is_delete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "删除标志",
+              "relationNoShow": true,
+              "defaultValue": "0"
+            },
+            {
+              "name": "delete_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "删除时间",
+              "relationNoShow": true
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "MAT事件上报表"
+        },
+        {
+          "title": "mat_map_work_handles",
+          "fields": [
+            {
+              "name": "id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "主键id",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "mat_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "mat系统handle_id"
+            },
+            {
+              "name": "work_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "流程id"
+            },
+            {
+              "name": "mat_work_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "mat系统流程id"
+            },
+            {
+              "name": "process_type",
+              "type": "Integer",
+              "remark": "0:否 1:是",
+              "chnname": "是否是属性筛选分支"
+            },
+            {
+              "name": "is_open_abtest",
+              "type": "Integer",
+              "remark": "0:关闭 1:开启",
+              "chnname": "是否开启ABTest"
+            },
+            {
+              "name": "is_compare",
+              "type": "Integer",
+              "remark": "0:否 1:是",
+              "chnname": "是否对照组"
+            },
+            {
+              "name": "percent",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "支线所占百分比"
+            },
+            {
+              "name": "exec_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "ABTest剩余处理执行时间"
+            },
+            {
+              "name": "REVISION",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CREATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CREATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UPDATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UPDATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "delete_by",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "删除人",
+              "relationNoShow": true
+            },
+            {
+              "name": "is_delete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "删除标志",
+              "relationNoShow": true,
+              "defaultValue": "0"
+            },
+            {
+              "name": "delete_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "删除时间",
+              "relationNoShow": true
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "自动化营销流程人群处理类型表"
+        },
+        {
+          "title": "mat_map_calculation_data",
+          "fields": [
+            {
+              "name": "id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "主键id",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "tag_group_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "群组id"
+            },
+            {
+              "name": "member_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "会员表id"
+            },
+            {
+              "name": "union_id",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "union_id"
+            },
+            {
+              "name": "open_id",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "open_id"
+            },
+            {
+              "name": "mod_code",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "模块code"
+            },
+            {
+              "name": "work_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "流程id"
+            },
+            {
+              "name": "mat_work_id",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "mat系统流程id"
+            },
+            {
+              "name": "handle_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "handle表id"
+            },
+            {
+              "name": "mat_handle_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "mat系统handle表id"
+            },
+            {
+              "name": "brand_id",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "品牌id"
+            },
+            {
+              "name": "original_id",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "机构id"
+            },
+            {
+              "name": "is_hit",
+              "type": "Integer",
+              "remark": "：0否，1是",
+              "chnname": "是否命中"
+            },
+            {
+              "name": "member_info",
+              "type": "MiddleString",
+              "remark": "",
+              "chnname": "会员相关信息"
+            },
+            {
+              "name": "REVISION",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CREATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CREATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UPDATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UPDATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "delete_by",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "删除人",
+              "relationNoShow": true
+            },
+            {
+              "name": "is_delete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "删除标志",
+              "relationNoShow": true,
+              "defaultValue": "0"
+            },
+            {
+              "name": "delete_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "删除时间",
+              "relationNoShow": true
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "自动化营销计算人群结果数据表"
+        },
+        {
+          "title": "mat_modular_model_relationship",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "主键id",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "modular_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "模块id"
+            },
+            {
+              "name": "model_id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "模型id"
+            },
+            {
+              "name": "REVISION",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CREATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CREATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UPDATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UPDATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "delete_by",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "删除人",
+              "relationNoShow": true
+            },
+            {
+              "name": "is_delete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "删除标志",
+              "relationNoShow": true,
+              "defaultValue": "0"
+            },
+            {
+              "name": "delete_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "删除时间",
+              "relationNoShow": true
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "模块模型关系表"
+        }
+      ],
+      "graphCanvas": {
+        "nodes": [
+          {
+            "shape": "table",
+            "title": "mat_event_property_relationship",
+            "moduleName": false,
+            "x": 260,
+            "y": 970,
+            "id": "e7627a0f"
+          },
+          {
+            "shape": "table",
+            "title": "mat_origin_terminal",
+            "moduleName": false,
+            "x": 1340,
+            "y": 860,
+            "id": "7bab7b4d"
+          },
+          {
+            "shape": "table",
+            "title": "mat_event_reporting_data",
+            "moduleName": false,
+            "x": 1330,
+            "y": 1190,
+            "id": "ba0a019a"
+          },
+          {
+            "shape": "table",
+            "title": "mat_user_property",
+            "moduleName": false,
+            "x": 820,
+            "y": 870,
+            "id": "f76a2795"
+          },
+          {
+            "shape": "table",
+            "title": "mat_event",
+            "moduleName": false,
+            "x": 820,
+            "y": 1210,
+            "id": "6720e947"
+          },
+          {
+            "shape": "table",
+            "title": "mat_event_property",
+            "moduleName": false,
+            "x": 820,
+            "y": 550,
+            "id": "8ca0043f"
+          },
+          {
+            "shape": "table",
+            "title": "mat_modular_model_relationship",
+            "moduleName": false,
+            "x": 370,
+            "y": 1790,
+            "id": "5cbf99f1"
+          },
+          {
+            "shape": "table",
+            "title": "mat_event_modular_relationship",
+            "moduleName": false,
+            "x": 330,
+            "y": 1380,
+            "id": "0739a65d"
+          },
+          {
+            "shape": "table",
+            "title": "mat_modular_info",
+            "moduleName": false,
+            "x": 770,
+            "y": 1610,
+            "id": "eded84f9"
+          },
+          {
+            "shape": "table",
+            "title": "mat_map_work_handles",
+            "moduleName": false,
+            "x": 1870,
+            "y": 2170,
+            "id": "7d3ffbe7"
+          },
+          {
+            "shape": "table",
+            "title": "mat_map_works_actions",
+            "moduleName": false,
+            "x": 2380,
+            "y": 2000,
+            "id": "41265f6d"
+          },
+          {
+            "shape": "table",
+            "title": "mat_map_works",
+            "moduleName": false,
+            "x": 1360,
+            "y": 2380,
+            "id": "d18a78f5"
+          },
+          {
+            "shape": "table",
+            "title": "mat_map_calculation_data",
+            "moduleName": false,
+            "x": 1340,
+            "y": 1860,
+            "id": "40caa479"
+          },
+          {
+            "shape": "table",
+            "title": "mat_map_send_records",
+            "moduleName": false,
+            "x": 1870,
+            "y": 1770,
+            "id": "c70de35e"
+          }
+        ],
+        "edges": [
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "7d3ffbe7",
+            "target": "d18a78f5",
+            "id": "c9b024f9",
+            "controlPoints": [
+              {
+                "x": 1688.3369140625,
+                "y": 2092.25
+              },
+              {
+                "x": 1545.7939453125,
+                "y": 2102.059523809524
+              }
+            ],
+            "sourceAnchor": 4,
+            "targetAnchor": 1
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "41265f6d",
+            "target": "7d3ffbe7",
+            "id": "0c853298",
+            "controlPoints": [
+              {
+                "x": 2189.302734375,
+                "y": 1892.2611111111112
+              },
+              {
+                "x": 2051.6630859375,
+                "y": 2052.1209677419356
+              }
+            ],
+            "sourceAnchor": 8,
+            "targetAnchor": 1
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "0739a65d",
+            "target": "6720e947",
+            "id": "8cb02737",
+            "controlPoints": [
+              {
+                "x": 481.38671875,
+                "y": 1342.3026315789473
+              },
+              {
+                "x": 653.52734375,
+                "y": 1102.1742424242425
+              }
+            ],
+            "sourceAnchor": 3,
+            "targetAnchor": 2
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "0739a65d",
+            "target": "eded84f9",
+            "id": "0f574281",
+            "controlPoints": [
+              {
+                "x": 481.38671875,
+                "y": 1362.407894736842
+              },
+              {
+                "x": 625.3447265625,
+                "y": 1562.2738095238096
+              }
+            ],
+            "sourceAnchor": 5,
+            "targetAnchor": 2
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "5cbf99f1",
+            "target": "eded84f9",
+            "id": "164cda6e",
+            "controlPoints": [
+              {
+                "x": 508.6552734375,
+                "y": 1752.3026315789473
+              },
+              {
+                "x": 625.3447265625,
+                "y": 1542.1785714285713
+              }
+            ],
+            "sourceAnchor": 3,
+            "targetAnchor": 0
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "ba0a019a",
+            "target": "6720e947",
+            "id": "50cd4989",
+            "controlPoints": [
+              {
+                "x": 1180.337890625,
+                "y": 1112.212962962963
+              },
+              {
+                "x": 986.47265625,
+                "y": 1102.1742424242425
+              }
+            ],
+            "sourceAnchor": 2,
+            "targetAnchor": 3
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "ba0a019a",
+            "target": "eded84f9",
+            "id": "e4fb500c",
+            "controlPoints": [
+              {
+                "x": 1180.337890625,
+                "y": 1192.5092592592594
+              },
+              {
+                "x": 914.6552734375,
+                "y": 1542.1785714285713
+              }
+            ],
+            "sourceAnchor": 10,
+            "targetAnchor": 1
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "6720e947",
+            "target": "7bab7b4d",
+            "id": "baa43600",
+            "controlPoints": [
+              {
+                "x": 986.47265625,
+                "y": 1142.2954545454545
+              },
+              {
+                "x": 1183.20703125,
+                "y": 792.1785714285714
+              }
+            ],
+            "sourceAnchor": 7,
+            "targetAnchor": 0
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "40caa479",
+            "target": "7d3ffbe7",
+            "id": "dde37657",
+            "controlPoints": [
+              {
+                "x": 1174.6552734375,
+                "y": 1852.4817073170732
+              },
+              {
+                "x": 1688.3369140625,
+                "y": 2052.1209677419356
+              }
+            ],
+            "sourceAnchor": 16,
+            "targetAnchor": 0
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "e7627a0f",
+            "target": "8ca0043f",
+            "id": "31879828",
+            "controlPoints": [
+              {
+                "x": 411.720703125,
+                "y": 952.4078947368421
+              },
+              {
+                "x": 657.3447265625,
+                "y": 452.18548387096774
+              }
+            ],
+            "sourceAnchor": 5,
+            "targetAnchor": 2
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "e7627a0f",
+            "target": "f76a2795",
+            "id": "328b4a03",
+            "controlPoints": [
+              {
+                "x": 411.720703125,
+                "y": 952.4078947368421
+              },
+              {
+                "x": 657.3447265625,
+                "y": 782.198275862069
+              }
+            ],
+            "sourceAnchor": 5,
+            "targetAnchor": 2
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "e7627a0f",
+            "target": "6720e947",
+            "id": "279fd58d",
+            "controlPoints": [
+              {
+                "x": 411.720703125,
+                "y": 932.3026315789474
+              },
+              {
+                "x": 653.52734375,
+                "y": 1102.1742424242425
+              }
+            ],
+            "sourceAnchor": 3,
+            "targetAnchor": 2
+          }
+        ]
+      },
+      "associations": [
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "mat_map_work_handles",
+            "field": "work_id"
+          },
+          "to": {
+            "entity": "mat_map_works",
+            "field": "id"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "mat_map_works_actions",
+            "field": "handle_id"
+          },
+          "to": {
+            "entity": "mat_map_work_handles",
+            "field": "id"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "mat_event_modular_relationship",
+            "field": "event_code"
+          },
+          "to": {
+            "entity": "mat_event",
+            "field": "event_code"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "mat_event_modular_relationship",
+            "field": "mod_code"
+          },
+          "to": {
+            "entity": "mat_modular_info",
+            "field": "mod_code"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "mat_modular_model_relationship",
+            "field": "modular_id"
+          },
+          "to": {
+            "entity": "mat_modular_info",
+            "field": "id"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "mat_event_reporting_data",
+            "field": "event_code"
+          },
+          "to": {
+            "entity": "mat_event",
+            "field": "event_code"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "mat_event_reporting_data",
+            "field": "mod_id"
+          },
+          "to": {
+            "entity": "mat_modular_info",
+            "field": "id"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "mat_event",
+            "field": "burying_point_platform"
+          },
+          "to": {
+            "entity": "mat_origin_terminal",
+            "field": "id"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "mat_map_calculation_data",
+            "field": "handle_id"
+          },
+          "to": {
+            "entity": "mat_map_work_handles",
+            "field": "id"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "mat_event_property_relationship",
+            "field": "property_code"
+          },
+          "to": {
+            "entity": "mat_event_property",
+            "field": "property_code"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "mat_event_property_relationship",
+            "field": "property_code"
+          },
+          "to": {
+            "entity": "mat_user_property",
+            "field": "property_code"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "mat_event_property_relationship",
+            "field": "event_code"
+          },
+          "to": {
+            "entity": "mat_event",
+            "field": "event_code"
+          }
+        }
+      ]
+    }
+  ],
+  "dataTypeDomains": {
+    "datatype": [
+      {
+        "name": "默认字串",
+        "code": "DefaultString",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "MYSQL": {
+            "type": "VARCHAR(32)"
+          },
+          "ORACLE": {
+            "type": "NVARCHAR2(32)"
+          },
+          "SQLServer": {
+            "type": "NVARCHAR(32)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(32)"
+          }
+        }
+      },
+      {
+        "name": "标识号",
+        "code": "IdOrKey",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "ORACLE": {
+            "type": "VARCHAR2(32)"
+          },
+          "MYSQL": {
+            "type": "VARCHAR(32)"
+          },
+          "SQLServer": {
+            "type": "VARCHAR(32)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(32)"
+          }
+        }
+      },
+      {
+        "name": "标识号-长",
+        "code": "LongKey",
+        "apply": {
+          "MYSQL": {
+            "type": "VARCHAR(64)"
+          },
+          "ORACLE": {
+            "type": "VARCHAR2(64)"
+          },
+          "JAVA": {
+            "type": "String"
+          },
+          "SQLServer": {
+            "type": "VARCHAR(64)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(64)"
+          }
+        }
+      },
+      {
+        "name": "名称",
+        "code": "Name",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "MYSQL": {
+            "type": "VARCHAR(128)"
+          },
+          "ORACLE": {
+            "type": "NVARCHAR2(128)"
+          },
+          "SQLServer": {
+            "type": "NVARCHAR(128)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(128)"
+          }
+        }
+      },
+      {
+        "name": "备注说明",
+        "code": "Intro",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "MYSQL": {
+            "type": "VARCHAR(512)"
+          },
+          "ORACLE": {
+            "type": "NVARCHAR2(512)"
+          },
+          "SQLServer": {
+            "type": "NVARCHAR(512)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(512)"
+          }
+        }
+      },
+      {
+        "name": "字串-短",
+        "code": "ShortString",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "MYSQL": {
+            "type": "VARCHAR(128)"
+          },
+          "ORACLE": {
+            "type": "NVARCHAR2(128)"
+          },
+          "SQLServer": {
+            "type": "NVARCHAR(128)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(128)"
+          }
+        }
+      },
+      {
+        "name": "字串-中",
+        "code": "MiddleString",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "MYSQL": {
+            "type": "VARCHAR(1024)"
+          },
+          "ORACLE": {
+            "type": "NVARCHAR2(1024)"
+          },
+          "SQLServer": {
+            "type": "NVARCHAR(1024)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(1024)"
+          }
+        }
+      },
+      {
+        "name": "字串-长",
+        "code": "LongString",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "ORACLE": {
+            "type": "NVARCHAR2(3072)"
+          },
+          "MYSQL": {
+            "type": "VARCHAR(3072)"
+          },
+          "SQLServer": {
+            "type": "NVARCHAR(3072)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(3072)"
+          }
+        }
+      },
+      {
+        "name": "大文本",
+        "code": "LongText",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "MYSQL": {
+            "type": "TEXT"
+          },
+          "ORACLE": {
+            "type": "CLOB"
+          },
+          "SQLServer": {
+            "type": "NTEXT"
+          },
+          "PostgreSQL": {
+            "type": "TEXT"
+          }
+        }
+      },
+      {
+        "name": "小数",
+        "code": "Double",
+        "apply": {
+          "JAVA": {
+            "type": "Double"
+          },
+          "MYSQL": {
+            "type": "DECIMAL(32,10)"
+          },
+          "ORACLE": {
+            "type": "NUMBER(32,10)"
+          },
+          "SQLServer": {
+            "type": "DECIMAL(32,10)"
+          },
+          "PostgreSQL": {
+            "type": "DECIMAL(32,10)"
+          }
+        }
+      },
+      {
+        "name": "比例",
+        "code": "Ratio",
+        "apply": {
+          "MYSQL": {
+            "type": "DECIMAL(4,2)"
+          },
+          "JAVA": {
+            "type": "Double"
+          },
+          "ORACLE": {
+            "type": "NUMBER(4,2)"
+          },
+          "SQLServer": {
+            "type": "DECIMAL(4,2)"
+          },
+          "PostgreSQL": {
+            "type": "DECIMAL(4,2)"
+          }
+        }
+      },
+      {
+        "name": "整数",
+        "code": "Integer",
+        "apply": {
+          "JAVA": {
+            "type": "Integer"
+          },
+          "MYSQL": {
+            "type": "INT"
+          },
+          "ORACLE": {
+            "type": "INT"
+          },
+          "SQLServer": {
+            "type": "INT"
+          },
+          "PostgreSQL": {
+            "type": "INT"
+          }
+        }
+      },
+      {
+        "name": "大整数",
+        "code": "BigInt",
+        "apply": {
+          "MYSQL": {
+            "type": "BIGINT"
+          },
+          "JAVA": {
+            "type": "Long"
+          },
+          "ORACLE": {
+            "type": "NUMBER"
+          },
+          "SQLServer": {
+            "type": "BIGINT"
+          },
+          "PostgreSQL": {
+            "type": "BIGINT"
+          }
+        }
+      },
+      {
+        "name": "金额",
+        "code": "Money",
+        "apply": {
+          "JAVA": {
+            "type": "Double"
+          },
+          "MYSQL": {
+            "type": "DECIMAL(32,8)"
+          },
+          "ORACLE": {
+            "type": "NUMBER(32,8)"
+          },
+          "SQLServer": {
+            "type": "DECIMAL(32,8)"
+          },
+          "PostgreSQL": {
+            "type": "DECIMAL(32,8)"
+          }
+        }
+      },
+      {
+        "name": "是否",
+        "code": "YesNo",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "MYSQL": {
+            "type": "VARCHAR(1)"
+          },
+          "ORACLE": {
+            "type": "VARCHAR2(1)"
+          },
+          "SQLServer": {
+            "type": "VARCHAR(1)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(1)"
+          }
+        }
+      },
+      {
+        "name": "数据字典",
+        "code": "Dict",
+        "apply": {
+          "JAVA": {
+            "type": "String"
+          },
+          "MYSQL": {
+            "type": "VARCHAR(32)"
+          },
+          "ORACLE": {
+            "type": "VARCHAR2(32)"
+          },
+          "SQLServer": {
+            "type": "VARCHAR(32)"
+          },
+          "PostgreSQL": {
+            "type": "VARCHAR(32)"
+          }
+        }
+      },
+      {
+        "name": "日期",
+        "code": "Date",
+        "apply": {
+          "JAVA": {
+            "type": "Date"
+          },
+          "MYSQL": {
+            "type": "DATE"
+          },
+          "ORACLE": {
+            "type": "DATE"
+          },
+          "SQLServer": {
+            "type": "DATE"
+          },
+          "PostgreSQL": {
+            "type": "DATE"
+          }
+        }
+      },
+      {
+        "name": "日期时间",
+        "code": "DateTime",
+        "apply": {
+          "JAVA": {
+            "type": "Date"
+          },
+          "MYSQL": {
+            "type": "DATETIME"
+          },
+          "ORACLE": {
+            "type": "DATE"
+          },
+          "SQLServer": {
+            "type": "DATE"
+          },
+          "PostgreSQL": {
+            "type": "DATE"
+          }
+        }
+      },
+      {
+        "name": "单字符",
+        "code": "Char",
+        "apply": {
+          "MYSQL": {
+            "type": "CHAR(1)"
+          },
+          "ORACLE": {
+            "type": "CHAR(1)"
+          },
+          "JAVA": {
+            "type": "String"
+          },
+          "SQLServer": {
+            "type": "CHAR(1)"
+          },
+          "PostgreSQL": {
+            "type": "CHAR(1)"
+          }
+        }
+      }
+    ],
+    "database": [
+      {
+        "code": "MYSQL",
+        "template": "DROP TABLE {{=it.entity.title}};\n$blankline\nCREATE TABLE {{=it.entity.title}}(\n{{ pkList = [] ; }}\n{{~it.entity.fields:field:index}}\n    {{? field.pk }}{{ pkList.push(field.name) }}{{?}}\n    {{=field.name}} {{=field.type}} {{= field.pk ? 'NOT NULL' : '' }} COMMENT '{{=it.func.join(field.chnname,field.remark,';')}}' {{= index < it.entity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}\n{{? pkList.length >0 }}\n    PRIMARY KEY ({{~pkList:pkName:i}}{{= pkName }}{{= i<pkList.length-1 ? ',' : '' }}{{~}})\n{{?}}\n) COMMENT = '{{=it.func.join(it.entity.chnname,it.entity.remark,';') }}'",
+        "fileShow": true,
+        "defaultDatabase": true,
+        "createTableTemplate": "CREATE TABLE {{=it.entity.title}}(\n{{ pkList = [] ; }}\n{{~it.entity.fields:field:index}}\n    {{? field.pk }}{{ pkList.push(field.name) }}{{?}}\n    {{=field.name}} {{=field.type}} {{= field.notNull ? 'NOT NULL' : '' }} {{= field.autoIncrement ? 'AUTO_INCREMENT' : '' }} {{= field.defaultValue ? it.func.join('DEFAULT',field.defaultValue,' ') : '' }} COMMENT '{{=it.func.join(field.chnname,field.remark,' ')}}' {{= index < it.entity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}\n{{? pkList.length >0 }}\n    PRIMARY KEY ({{~pkList:pkName:i}}{{= pkName }}{{= i<pkList.length-1 ? ',' : '' }}{{~}})\n{{?}}\n) COMMENT = '{{=it.func.join(it.entity.chnname,it.entity.remark,' ') }}'{{=it.separator}}\n$blankline\n",
+        "deleteTableTemplate": "DROP TABLE {{=it.entity.title}}{{=it.separator}}",
+        "rebuildTableTemplate": "create table PDMAN_UP_{{=it.oldEntity.title}}\nas select * from {{=it.oldEntity.title}}{{=it.separator}}\n$blankline\n\ndrop table {{=it.oldEntity.title}}{{=it.separator}}\n$blankline\n\nCREATE TABLE {{=it.newEntity.title}}(\n{{ pkList = [] ; }}\n{{~it.newEntity.fields:field:index}}\n    {{? field.pk }}{{ pkList.push(field.name) }}{{?}}\n    {{=field.name}} {{=field.type}} {{= field.notNull ? 'NOT NULL' : '' }} COMMENT '{{=it.func.join(field.chnname,field.remark,';')}}' {{= index < it.newEntity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}\n{{? pkList.length >0 }}\n    PRIMARY KEY ({{~pkList:pkName:i}}{{= pkName }}{{= i<pkList.length-1 ? ',' : '' }}{{~}})\n{{?}}\n) COMMENT = '{{=it.func.join(it.newEntity.chnname,it.newEntity.remark,';') }}'{{=it.separator}}\n$blankline\n\n{{ sameCols = it.func.intersect(it.newEntity.fields,it.oldEntity.fields) ;}}\ninsert into {{=it.newEntity.title}}(\n{{~sameCols:field:index}}\n    {{=field.name}}{{? index<sameCols.length-1}},{{?}}\n{{~}}\n) \nselect \n{{~sameCols:field:index}}\n    {{=field.name}}{{? index<sameCols.length-1}},{{?}}\n{{~}}\nfrom PDMAN_UP_{{=it.oldEntity.title}}{{=it.separator}}\n$blankline\n\ndrop table PDMAN_UP_{{=it.oldEntity.title}}{{=it.separator}}\n$blankline\n{{~it.newEntity.indexs:index}}\nALTER TABLE {{=it.newEntity.title}} ADD {{? index.isUnique}}UNIQUE{{??}}INDEX{{?}} {{=index.name}}({{=it.func.join(...index.fields,',')}}){{=it.separator}}\n{{~}}",
+        "createFieldTemplate": "ALTER TABLE {{=it.entity.title}} ADD COLUMN {{=it.field.name}} {{=it.field.type}} {{? it.field.notNull}}NOT NULL{{?}} {{? it.field.defaultValue}}DEFAULT {{? null==it.field.defaultValue}}NULL{{??}}'{{=it.field.defaultValue}}'{{?}}{{?}} {{? it.field.autoIncrement}}AUTO_INCREMENT{{?}} {{? it.field.pk}}PRIMARY KEY{{?}} {{? it.field.chnname}}COMMENT '{{=it.field.chnname}}'{{?}} {{? it.field.addAfter}}AFTER {{=it.field.addAfter}}{{?}}{{=it.separator}}",
+        "updateFieldTemplate": "ALTER TABLE {{=it.entity.title}} MODIFY COLUMN {{=it.field.name}} {{=it.field.type}} {{? it.field.notNull}}NOT NULL{{?}} {{? it.field.defaultValue}}DEFAULT {{? null==it.field.defaultValue}}NULL{{??}}'{{=it.field.defaultValue}}'{{?}}{{?}} {{? it.field.autoIncrement}}AUTO_INCREMENT{{?}} {{? it.field.chnname}}COMMENT '{{=it.field.chnname}}'{{?}}{{=it.separator}}",
+        "deleteFieldTemplate": "ALTER TABLE {{=it.entity.title}} DROP {{=it.field.name}}{{=it.separator}}",
+        "deleteIndexTemplate": "ALTER TABLE {{=it.entity.title}} DROP INDEX {{=it.index.name}}{{=it.separator}}",
+        "createIndexTemplate": "ALTER TABLE {{=it.entity.title}} ADD {{? it.index.isUnique}}UNIQUE{{??}}INDEX{{?}} {{=it.index.name}}({{=it.func.join(...it.index.fields,',')}}){{=it.separator}}",
+        "updateTableComment": "ALTER TABLE {{=it.entity.title}} COMMENT '{{=it.entity.chnname}}'{{=it.separator}}"
+      },
+      {
+        "code": "ORACLE",
+        "template": "DROP TABLE {{=it.entity.title}}{{=it.separator}}\n$blankline\nCREATE TABLE {{=it.entity.title}}(\n{{ pkList = [] ; }}\n{{~it.entity.fields:field:index}}\n    {{? field.pk }}{{ pkList.push(field.name) }}{{?}}\n    {{=field.name}} {{=field.type}}  {{= field.pk ? 'NOT NULL' : '' }} {{= index < it.entity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}\n{{? pkList.length >0 }}\n    PRIMARY KEY ({{~pkList:pkName:i}}{{= pkName }}{{= i<pkList.length-1 ? ',' : '' }}{{~}})\n{{?}}\n){{=it.separator}}\n$blankline\nCOMMENT ON TABLE {{=it.entity.title}} IS '{{=it.func.join(it.entity.chnname,it.entity.remark,';') }}'{{=it.separator}}\n{{~it.entity.fields:field:index}}\nCOMMENT ON COLUMN {{=it.entity.title}}.{{=field.name}} IS '{{=it.func.join(field.chnname,field.remark,';')}}'{{=it.separator}}\n{{~}}",
+        "createTableTemplate": "CREATE TABLE {{=it.entity.title}}(\n{{ pkList = [] ; }}\n{{~it.entity.fields:field:index}}\n    {{? field.pk }}{{ pkList.push(field.name) }}{{?}}\n    {{=field.name}} {{=field.type}}{{? field.defaultValue}} DEFAULT {{=field.defaultValue}}{{?}}{{= field.notNull ? ' NOT NULL' : '' }}{{= index < it.entity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}\n{{? pkList.length >0 }}\n    PRIMARY KEY ({{~pkList:pkName:i}}{{= pkName }}{{= i<pkList.length-1 ? ',' : '' }}{{~}})\n{{?}}\n){{=it.separator}}\n$blankline\n{{? it.entity.chnname || it.entity.remark}}COMMENT ON TABLE {{=it.entity.title}} IS {{? it.entity.remark}}'{{=it.entity.remark}}'{{??}}'{{=it.entity.chnname}}'{{?}}{{=it.separator}}{{?}}\n{{~it.entity.fields:field:index}}\n{{? field.chnname || field.remark}}COMMENT ON COLUMN {{=it.entity.title}}.{{=field.name}} IS {{? field.remark}}'{{=field.remark}}'{{??}}'{{=field.chnname}}'{{?}}{{=it.separator}}{{?}}\n{{~}}",
+        "deleteTableTemplate": "DROP TABLE {{=it.entity.title}}{{=it.separator}}\r\n$blankline",
+        "rebuildTableTemplate": "CREATE TABLE PDMAN_UP_{{=it.oldEntity.title}}\nAS SELECT * FROM {{=it.oldEntity.title}}{{=it.separator}}\n$blankline\nDROP TABLE {{=it.oldEntity.title}}{{=it.separator}}\n$blankline\nCREATE TABLE {{=it.newEntity.title}}(\n{{ pkList = [] ; }}{{~it.newEntity.fields:field:index}}{{? field.pk }}{{ pkList.push(field.name) }}{{?}}    {{=field.name}} {{=field.type}}{{? field.defaultValue}} DEFAULT {{=field.defaultValue}}{{?}}{{= field.notNull ? ' NOT NULL' : '' }}{{= index < it.newEntity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}{{? pkList.length >0 }}    PRIMARY KEY ({{~pkList:pkName:i}}{{= pkName }}{{= i<pkList.length-1 ? ',' : '' }}{{~}}){{?}}\n){{=it.separator}}\n$blankline\n{{? it.newEntity.chnname || it.newEntity.remark}}COMMENT ON TABLE {{=it.newEntity.title}} IS {{? it.newEntity.remark}}'{{=it.entity.remark}}'{{??}}'{{=it.newEntity.chnname}}'{{?}};{{?}}{{=it.separator}}\n{{~it.newEntity.fields:field:index}}\n{{? field.chnname || field.remark}}COMMENT ON COLUMN {{=it.newEntity.title}}.{{=field.name}} IS {{? field.remark}}'{{=field.remark}}'{{??}}'{{=field.chnname}}'{{?}};{{?}}{{=it.separator}}\n{{~}}\n{{ sameCols = it.func.intersect(it.newEntity.fields,it.oldEntity.fields) ;}}\n$blankline\nINSERT INTO {{=it.newEntity.title}}(\n{{~sameCols:field:index}}   {{=field.name}}{{? index<sameCols.length-1}},{{?}}\n{{~}}) \nSELECT\n{{~sameCols:field:index}}   {{=field.name}}{{? index<sameCols.length-1}},{{?}}\n{{~}}FROM PDMAN_UP_{{=it.oldEntity.title}}{{=it.separator}}\n\nDROP TABLE PDMAN_UP_{{=it.oldEntity.title}}{{=it.separator}}\n{{~it.newEntity.indexs:index}}\nCREATE{{? index.isUnique}} UNIQUE{{?}} INDEX {{=index.name}} ON {{=it.newEntity.title}}({{=it.func.join(index.fields,',')}}){{=it.separator}}\n{{~}}",
+        "createFieldTemplate": "ALTER TABLE {{=it.entity.title}} ADD({{=it.field.name}} {{=it.field.type}}{{? it.field.defaultValue}} DEFAULT {{=it.field.defaultValue}}{{?}}{{? it.field.notNull}} NOT NULL{{?}}){{=it.separator}}\r\n{{? it.field.chnname || it.field.remark}}COMMENT ON COLUMN {{=it.entity.title}}.{{=it.field.name}} IS {{? it.field.remark}}'{{=it.field.remark}}'{{??}}'{{=it.field.chnname}}'{{?}}{{=it.separator}}{{?}}\r\n$blankline",
+        "updateFieldTemplate": "ALTER TABLE {{=it.entity.title}} MODIFY({{=it.field.name}} {{=it.field.type}}{{? it.field.defaultValue}} DEFAULT {{=it.field.defaultValue}}{{?}}{{? it.field.notNull}} NOT NULL{{?}}){{=it.separator}}\r\n{{? it.field.chnname || it.field.remark}}COMMENT ON COLUMN {{=it.entity.title}}.{{=it.field.name}} IS {{? it.field.remark}}'{{=it.field.remark}}'{{??}}'{{=it.field.chnname}}'{{?}}{{=it.separator}}{{=it.separator}}{{?}}\r\n$blankline",
+        "deleteFieldTemplate": "ALTER TABLE {{=it.entity.title}} DROP({{=it.field.name}}){{=it.separator}}\r\n$blankline",
+        "deleteIndexTemplate": "DROP INDEX {{=it.entity.title}}.{{=it.index.name}}{{=it.separator}}\r\n$blankline",
+        "createIndexTemplate": "CREATE{{? it.index.isUnique}} UNIQUE{{?}} INDEX {{=it.index.name}} ON {{=it.entity.title}}({{=it.func.join(it.index.fields,',')}}){{=it.separator}}\r\n$blankline",
+        "updateTableComment": "{{? it.entity.chnname || it.entity.remark}}COMMENT ON TABLE {{=it.entity.title}} IS {{? it.entity.remark}}'{{=it.entity.remark}}'{{??}}'{{=it.entity.chnname}}'{{?}}{{=it.separator}}{{?}}\r\n$blankline"
+      },
+      {
+        "code": "SQLServer",
+        "createTableTemplate": "CREATE TABLE {{=it.entity.title}}(\n{{ pkList = [] ; }}\n{{~it.entity.fields:field:index}}\n    {{? field.pk }}{{ pkList.push(field.name) }}{{?}}\n    {{=field.name}} {{=field.type}} {{= field.notNull ? 'NOT NULL' : '' }} {{= field.autoIncrement ? 'IDENTITY(1,1)' : '' }} {{= field.defaultValue ? it.func.join('DEFAULT',field.defaultValue,' ') : '' }}  {{= index < it.entity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}\n{{? pkList.length >0 }}\n    CONSTRAINT PK_{{=it.entity.title}} PRIMARY KEY CLUSTERED ({{~pkList:pkName:i}}{{= pkName }} ASC {{= i<pkList.length-1 ? ',' : '' }}{{~}}) ON [PRIMARY] \n{{?}}\n){{=it.separator}}\n\n$blankline\nEXECUTE sp_addextendedproperty N'MS_Description', '{{= it.entity.chnname || it.entity.remark}}', N'user', N'dbo', N'table', N'{{=it.entity.title}}', NULL, NULL{{=it.separator}}\n{{~it.entity.fields:field:index}}\n{{? field.chnname || field.remark}}EXECUTE sp_addextendedproperty N'MS_Description', {{? field.remark}}'{{=field.remark}}'{{??}}'{{=field.chnname}}'{{?}}, N'user', N'dbo', N'table', N'{{=it.entity.title}}', N'column', N'{{=field.name}}'{{=it.separator}}{{?}}\n{{~}}\n",
+        "deleteTableTemplate": "",
+        "rebuildTableTemplate": "",
+        "createFieldTemplate": "",
+        "updateFieldTemplate": "",
+        "deleteFieldTemplate": "",
+        "deleteIndexTemplate": "",
+        "createIndexTemplate": "",
+        "updateTableComment": ""
+      },
+      {
+        "code": "PostgreSQL",
+        "template": "DROP TABLE {{=it.entity.title}};\n$blankline\nCREATE TABLE {{=it.entity.title}}(\n{{ pkList = [] ; }}\n{{~it.entity.fields:field:index}}\n    {{? field.pk }}{{ pkList.push(field.name) }}{{?}}\n    {{=field.name}} {{=field.type}} {{= field.pk ? 'NOT NULL' : '' }} COMMENT '{{=it.func.join(field.chnname,field.remark,';')}}' {{= index < it.entity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}\n{{? pkList.length >0 }}\n    PRIMARY KEY ({{~pkList:pkName:i}}{{= pkName }}{{= i<pkList.length-1 ? ',' : '' }}{{~}})\n{{?}}\n) COMMENT = '{{=it.func.join(it.entity.chnname,it.entity.remark,';') }}'",
+        "createTableTemplate": "CREATE TABLE {{=it.entity.title}}(\n{{ pkList = [] ; }}\n{{~it.entity.fields:field:index}}\n    {{? field.pk }}{{ pkList.push(field.name) }}{{?}}\n    {{=field.name}} {{=field.type}}{{? field.defaultValue}} DEFAULT {{=field.defaultValue}}{{?}}{{= field.notNull ? ' NOT NULL' : '' }}{{= index < it.entity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}\n{{? pkList.length >0 }}\n    PRIMARY KEY ({{~pkList:pkName:i}}{{= pkName }}{{= i<pkList.length-1 ? ',' : '' }}{{~}})\n{{?}}\n){{=it.separator}}\n$blankline\n{{? it.entity.chnname || it.entity.remark}}COMMENT ON TABLE {{=it.entity.title}} IS {{? it.entity.remark}}'{{=it.entity.remark}}'{{??}}'{{=it.entity.chnname}}'{{?}}{{=it.separator}}{{?}}\n{{~it.entity.fields:field:index}}\n{{? field.chnname || field.remark}}COMMENT ON COLUMN {{=it.entity.title}}.{{=field.name}} IS {{? field.remark}}'{{=field.remark}}'{{??}}'{{=field.chnname}}'{{?}}{{=it.separator}}{{?}}\n{{~}}",
+        "deleteTableTemplate": "DROP TABLE {{=it.entity.title}}{{=it.separator}}",
+        "rebuildTableTemplate": "create table PDMAN_UP_{{=it.oldEntity.title}}\nas select * from {{=it.oldEntity.title}}{{=it.separator}}\n$blankline\n\ndrop table {{=it.oldEntity.title}}{{=it.separator}}\n$blankline\n\nCREATE TABLE {{=it.newEntity.title}}(\n{{ pkList = [] ; }}\n{{~it.newEntity.fields:field:index}}\n    {{? field.pk }}{{ pkList.push(field.name) }}{{?}}\n    {{=field.name}} {{=field.type}} {{= field.notNull ? 'NOT NULL' : '' }} COMMENT '{{=it.func.join(field.chnname,field.remark,';')}}' {{= index < it.newEntity.fields.length-1 ? ',' : ( pkList.length>0 ? ',' :'' ) }}\n{{~}}\n{{? pkList.length >0 }}\n    PRIMARY KEY ({{~pkList:pkName:i}}{{= pkName }}{{= i<pkList.length-1 ? ',' : '' }}{{~}})\n{{?}}\n) COMMENT = '{{=it.func.join(it.newEntity.chnname,it.newEntity.remark,';') }}'{{=it.separator}}\n$blankline\n\n{{ sameCols = it.func.intersect(it.newEntity.fields,it.oldEntity.fields) ;}}\ninsert into {{=it.newEntity.title}}(\n{{~sameCols:field:index}}\n    {{=field.name}}{{? index<sameCols.length-1}},{{?}}\n{{~}}\n) \nselect \n{{~sameCols:field:index}}\n    {{=field.name}}{{? index<sameCols.length-1}},{{?}}\n{{~}}\nfrom PDMAN_UP_{{=it.oldEntity.title}}{{=it.separator}}\n$blankline\n\ndrop table PDMAN_UP_{{=it.oldEntity.title}}{{=it.separator}}",
+        "createFieldTemplate": "ALTER TABLE {{=it.entity.title}} ADD COLUMN {{=it.field.name}} {{=it.field.type}} {{? it.field.notNull}}NOT NULL{{?}} {{? it.field.defaultValue}}DEFAULT {{? null==it.field.defaultValue}}NULL{{??}}'{{=it.field.defaultValue}}'{{?}}{{?}} {{? it.field.autoIncrement}}AUTO_INCREMENT{{?}} {{? it.field.pk}}PRIMARY KEY{{?}} {{? it.field.chnname}}COMMENT '{{=it.field.chnname}}'{{?}} {{? it.field.addAfter}}AFTER {{=it.field.addAfter}}{{?}}{{=it.separator}}",
+        "updateFieldTemplate": "ALTER TABLE {{=it.entity.title}} MODIFY COLUMN {{=it.field.name}} {{=it.field.type}} {{? it.field.notNull}}NOT NULL{{?}} {{? it.field.defaultValue}}DEFAULT {{? null==it.field.defaultValue}}NULL{{??}}'{{=it.field.defaultValue}}'{{?}}{{?}} {{? it.field.autoIncrement}}AUTO_INCREMENT{{?}} {{? it.field.chnname}}COMMENT '{{=it.field.chnname}}'{{?}}{{=it.separator}}",
+        "deleteFieldTemplate": "ALTER TABLE {{=it.entity.title}} DROP {{=it.field.name}}{{=it.separator}}",
+        "deleteIndexTemplate": "ALTER TABLE {{=it.entity.title}} DROP INDEX {{=it.index.name}}{{=it.separator}}",
+        "createIndexTemplate": "ALTER TABLE {{=it.entity.title}} ADD {{? it.index.isUnique}}UNIQUE{{??}}INDEX{{?}} {{=it.index.name}}({{=it.func.join(...it.index.fields,',')}}){{=it.separator}}",
+        "updateTableComment": "ALTER TABLE {{=it.entity.title}} COMMENT '{{=it.entity.chnname}}'{{=it.separator}}"
+      },
+      {
+        "code": "JAVA",
+        "template": "package group.rober.pdman.{{=it.module.name}}.entity;\n$blankline\nimport javax.persistence.*;\nimport java.io.Serializable;\nimport java.util.Date;\n$blankline\n$blankline\n\n/** {{=it.entity.chnname}} */\n@Table(name=\"{{=it.entity.title}}\")\npublic class {{=it.func.camel(it.entity.title,true) }} implements Serializable,Cloneable{\n{{~it.entity.fields:field:index}}\n    /** {{=it.func.join(field.chnname,field.remark,';')}} */\n    {{? field.pk }}\n    @Id\n    @GeneratedValue\n    {{?}}\n    private {{=field.type}} {{=it.func.camel(field.name,false)}} ;\n{{~}}\n$blankline\n{{~it.entity.fields:field:index}}\n    /** {{=it.func.join(field.chnname,field.remark,';')}} */\n    public {{=field.type}} get{{=it.func.camel(field.name,true)}}(){\n        return this.{{=it.func.camel(field.name,false)}};\n    }\n    /** {{=it.func.join(field.chnname,field.remark,';')}} */\n    public void set{{=it.func.camel(field.name,true)}}({{=field.type}} {{= it.func.camel(field.name,false) }}){\n        this.{{=it.func.camel(field.name,false)}} = {{= it.func.camel(field.name,false) }};\n    }\n{{~}}\n}",
+        "createTableTemplate": "package group.rober.pdman.{{=it.module.name}}.entity;\n$blankline\nimport javax.persistence.*;\nimport java.io.Serializable;\nimport java.util.Date;\n$blankline\n$blankline\n@Table(name=\"{{=it.entity.title}}\")\npublic class {{=it.func.camel(it.entity.title,true) }} implements Serializable,Cloneable{\n{{~it.entity.fields:field:index}}\n    /** {{=it.func.join(field.chnname,field.remark,';')}} */\n    {{? field.pk }}\n    @Id\n    @GeneratedValue\n    {{?}}\n    private {{=field.type}} {{=it.func.camel(field.name,false)}} ;\n{{~}}\n$blankline\n{{~it.entity.fields:field:index}}\n    /** {{=it.func.join(field.chnname,field.remark,';')}} */\n    public {{=field.type}} get{{=it.func.camel(field.name,true)}}(){\n        return this.{{=it.func.camel(field.name,false)}};\n    }\n    /** {{=it.func.join(field.chnname,field.remark,';')}} */\n    public void set{{=it.func.camel(field.name,true)}}({{=field.type}} {{= it.func.camel(field.name,false) }}){\n        this.{{=it.func.camel(field.name,false)}} = {{= it.func.camel(field.name,false) }};\n    }\n{{~}}\n}",
+        "deleteTableTemplate": "",
+        "rebuildTableTemplate": "",
+        "createFieldTemplate": "",
+        "updateFieldTemplate": "",
+        "deleteFieldTemplate": "",
+        "deleteIndexTemplate": "",
+        "createIndexTemplate": "",
+        "updateTableComment": ""
+      }
+    ]
+  }
+}

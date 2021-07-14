@@ -1,0 +1,99 @@
+server:
+  port: 18081
+  host: localhost
+spring:
+  application:
+    name: tag-etocrm-authentication-server
+    main:
+      allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos-tag.etocrm.net:80
+#        namespace: ab3c6890-ad8d-4e4d-9e48-c552bc18c59b
+      config:
+        file-extension: yml
+        server-addr: nacos-tag.etocrm.net:80
+#        group: PROD
+#        namespace: ab3c6890-ad8d-4e4d-9e48-c552bc18c59b
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.60.96.105:4000/eto_crm_sys?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: dev_root
+    password: ^x:ww.5h<Jcg
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat,slf4j
+    initialSize: 10
+    initialization-mode: always
+    maxActive: 200
+    maxPoolPreparedStatementPerConnectionSize: 20
+    maxWait: 10000
+    minEvictableIdleTimeMillis: 30000
+    minIdle: 20
+    poolPreparedStatements: true
+    testOnBorrow: false
+    testOnReturn: false
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 20000
+    validationQuery: select 'x'
+    druid:
+      filter:
+        wall:
+          config:
+            multi-statement-allow: true
+  redis:
+    database: 0
+    host: 10.100.20.243
+    port: 6379
+    password: 123456
+  servlet:
+    multipart:
+      enabled: true
+      #单个文件大小
+      max-file-size: 10MB
+      #总上传数据大小
+      max-request-size: 20MB
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+auth:
+  authResourceId: order
+  roleAdmin: ADMIN
+  clientSecret: 123456
+  clientId: clientId
+  grantType: password, refresh_token, client_credentials
+  license: etocrm
+  signingKey: asdfadf
+  whiteList : /auth/login, /auth/crmauth, /auth/permission
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000 # 5s,路由转发时HystrixCommand的执行超时时间，执行超过该时间会进行服务降级处理
+ribbon:
+  ###指的是建立连接所用的时间，适用于网络状况正常的情况下，两端连接所用的时间。
+  ReadTimeout: 50000
+  ###指的是建立连接后从服务器读取到可用资源所用的时间。
+  ConnectTimeout: 50000
+feign:
+  hystrix:
+    enabled: true
+knife4j:
+  production: true
+authutils:
+  host: /auth/crmauth
+  requestGetUserUrl: http://woaapsh.woaap.com/token-info
+logging:
+  config: 'classpath:logback-spring-prod.xml'
+  level:
+    mapper: debug
+    org:
+      mybatis: debug
+init:
+  admin:
+    sign: false
+    password: 123456
